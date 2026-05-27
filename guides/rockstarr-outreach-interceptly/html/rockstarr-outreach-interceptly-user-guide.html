@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Outreach, Interceptly Edition</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-outreach-interceptly-edition">Rockstarr Outreach, Interceptly Edition</h1>
+<p><em>User guide for founder-led clients — v0.2.5</em></p>
+<blockquote>
+<p><strong>At a glance</strong></p>
+<ul>
+<li>A LinkedIn outreach system that runs through Interceptly, across one or more LinkedIn accounts you manage.</li>
+<li>Sends a three-step sequence (short connect note + two follow-ups) to every ICP-matched lead.</li>
+<li>Runs on a schedule by default (around 7am local). When replies land overnight, you get one urgent email; click the link to approve in Cowork.</li>
+<li>Nothing sends on a reply thread without your approval. Interceptly enforces send pacing per account. The bot never presses Start on a campaign.</li>
+<li>Your time commitment: about 10 minutes per weekday (15 if you manage multiple accounts), 30 minutes on Fridays.</li>
+</ul>
+</blockquote>
+<p>This is the guide to rockstarr-outreach-interceptly v0.2.5, the Rockstarr LinkedIn outreach system your Rockstarr lead installed in your Cowork workspace. It runs multi-touch campaigns through Interceptly across every LinkedIn account you manage there, hands every reply to rockstarr-reply for drafting and your approval, and emits one urgent email per scheduled run when reply drafts are waiting for you.</p>
+<p>Two things this guide is not: a setup manual (your Rockstarr lead handles setup) and a technical reference (that is maintained separately). This is a founder’s guide to what the system does, what it asks of you, and how you know it is working.</p>
+<h2 id="1-what-the-system-does-and-doesnt-do">1. What the system does (and doesn’t do)</h2>
+<p>What it does</p>
+<ul>
+<li><p>Runs LinkedIn outreach campaigns on your behalf through Interceptly, using ICP filters you define inside Interceptly.</p></li>
+<li><p>Operates across every LinkedIn account you manage through Interceptly — one, two, or more — rotating through each account on every daily pass.</p></li>
+<li><p>Drafts a three-step sequence for each campaign: a short connect note plus two follow-ups. Interceptly runs the pacing.</p></li>
+<li><p>Walks the Interceptly inbox for each account, qualifies every reply against your ICP, and hands the reply to rockstarr-reply, which drafts the response.</p></li>
+<li><p>Runs on a schedule (default 7am local) without you in the chat. When the scheduled run finishes and there are reply drafts waiting, fires ONE urgent email summarizing every draft with a click-to-approve link.</p></li>
+<li><p>Books meetings automatically (via your booking link) or queues them for you to book manually, depending on your setup.</p></li>
+<li><p>Gives you a one-page report every Friday.</p></li>
+<li><p>Scrubs every draft for AI writing patterns before you see it, so what lands in your queue reads like a human wrote it.</p></li>
+</ul>
+<p>What it does not do</p>
+<ul>
+<li><p>It does not pitch. No sequence message asks for a meeting, and no message talks about what you sell.</p></li>
+<li><p>It does not run outside Interceptly. Interceptly is the source-of-truth for every send.</p></li>
+<li><p>It does not press Start on an Interceptly campaign. That remains a human click — you or your Rockstarr lead.</p></li>
+<li><p>It does not send anything on a reply thread without your approval. Background runs only stage drafts; releasing them is your job.</p></li>
+<li><p>It does not send across the wrong account. Every per-account pass verifies the Interceptly sidebar AND the underlying LinkedIn profile URL before anything goes out.</p></li>
+<li><p>It does not hand your booking link to a lead in sequence copy. Times are always proposed inside an approved reply.</p></li>
+<li><p>It does not email you when nothing happened. Silence means the loop ran and nothing needed your attention.</p></li>
+</ul>
+<h2 id="2-what-you-get">2. What you get</h2>
+<p>Every day</p>
+<ul>
+<li><p>Session confirmation on every account you manage, before anything runs.</p></li>
+<li><p>The Interceptly inbox walked on every account, with replies handed to rockstarr-reply and queued as drafts for your approval.</p></li>
+<li><p>Overdue and due-today tasks worked (follow-ups, meeting proposals, bookings), again per account.</p></li>
+<li><p>If anything is waiting for you: one urgent email at the end of the run with every draft inline and a click-to-approve link per card.</p></li>
+<li><p>A per-run summary file at /02_inputs/outreach/daily-loop-&lt;yyyy-mm-dd&gt;.md as your single source of truth for what the bot did.</p></li>
+</ul>
+<p>Every Friday</p>
+<ul>
+<li><p>A weekly report showing connects sent, accepts, replies, meetings booked, reply rate, and book rate.</p></li>
+<li><p>A roll-up across every account and every active campaign.</p></li>
+<li><p>A short “what to watch” section flagging any campaign or account that is off-pace, with a one-line diagnosis.</p></li>
+</ul>
+<h2 id="3-what-we-need-from-you-before-we-start">3. What we need from you before we start</h2>
+<p>Five items. No more.</p>
+<ol type="1">
+<li><p>An Interceptly seat with at least one LinkedIn account connected. If you manage multiple accounts through Interceptly, we rotate through all of them. Each connected account must be signed in in your default browser.</p></li>
+<li><p>One approved ICP per campaign. We pull the baseline from the workbook you completed during onboarding. Before each new campaign, your Rockstarr lead walks you through a short per-campaign clarification pass — role, company size, geography, disqualifiers — specific to that campaign. Those per-campaign adjustments never overwrite your baseline ICP.</p></li>
+<li><p>An Interceptly saved-search / ICP filter set per campaign. We do not scrape. Interceptly’s own filters are the lead source.</p></li>
+<li><p>Three decisions per campaign. What is the single pain your ICP feels that nobody else names precisely (we call this the anchor phrase), how should meetings be booked (automated via your booking link, or manually from your calendar), and who on your side approves replies.</p></li>
+<li><p>About 10 to 15 minutes per weekday during active campaigns — closer to 15 if you manage multiple accounts — plus roughly 30 minutes on Fridays for the weekly report. Most of that time is in your inbox, not Cowork.</p></li>
+</ol>
+<h2 id="4-how-the-daily-loop-works">4. How the daily loop works</h2>
+<p>There is one orchestration skill — daily-loop — that runs the whole pass. Two modes share the same per-account work but differ in how they handle reply approvals.</p>
+<p>Background mode (the scheduled morning run, default)</p>
+<p>The schedule fires daily-loop at the configured time (default 7am local). For each LinkedIn account you manage through Interceptly, in a fixed order, the system:</p>
+<ol start="6" type="1">
+<li><p>Switches to that account inside Interceptly.</p></li>
+<li><p>Confirms the session — verifies the Interceptly sidebar AND the underlying LinkedIn profile URL match what we expect. If either check fails, that account’s pass stops; the loop continues with the next account.</p></li>
+<li><p>Walks the Interceptly inbox, qualifying every reply and handing it to rockstarr-reply, which stages a draft response in your approval queue.</p></li>
+<li><p>Works overdue and due-today tasks the same way — staging drafts where applicable.</p></li>
+<li><p>Applies labels inside Interceptly for outcomes that don’t need your approval (already-booked, polite ack, opt-out, flagged-for-review). These are deterministic and run inline.</p></li>
+<li><p>Books meetings (via book-meeting tasks) the lead already agreed to on a prior turn — those don’t need re-approval.</p></li>
+<li><p>Moves to the next account.</p></li>
+</ol>
+<p>At the end of the run, if any reply drafts were staged, the system fires ONE urgent email titled “N new replies need your review” with each draft inline. If no drafts were staged across any account, no email is sent.</p>
+<p>Background mode never sends a brand-new reply on its own. It stages, you authorize, then your authorization triggers the actual send through Interceptly on the right account.</p>
+<p>Foreground mode (you, in chat)</p>
+<p>Type “Run today’s outreach loop” in a Cowork task. The same daily-loop skill runs, but with you watching. As each draft is staged, the system presents it to you inline and you respond approve / edit / reject / flag in real time. No email at the end — the approvals already happened.</p>
+<p>Afternoon pass</p>
+<p>There is an optional afternoon scheduled run that walks just the inbox (no task pass). If new replies arrived during the day, you get a second email. Most clients leave this off and check the inbox once in the morning.</p>
+<p>What you see in your workspace: a single workbook named outreach-mirror.xlsx, plus a per-run markdown summary at /02_inputs/outreach/daily-loop-&lt;yyyy-mm-dd&gt;.md. Interceptly is the source-of-truth for what got sent; the workbook is your audit mirror. If they ever disagree, Interceptly wins.</p>
+<h2 id="5-your-daily-touchpoints">5. Your daily touchpoints</h2>
+<p>Every weekday, about 10 minutes total (15 if you manage multiple accounts):</p>
+<ul>
+<li><p>Morning, 2 minutes. Check email. Subject line if anything landed: “N new replies need your review” (or “Reply from &lt;name&gt; needs your review” for a single). No email = nothing needed your attention.</p></li>
+<li><p>Midday, 5 to 10 minutes. Click the link in the email. Cowork opens at the approval queue with the most recent reply loaded. For each draft, respond Approve / Edit / Reject / Flag. Approve is what releases the send through Interceptly on the correct account.</p></li>
+<li><p>Your browser. Stays signed in to every LinkedIn account in the background. That is the only steady-state requirement.</p></li>
+</ul>
+<p>If you don’t see the email but expect replies, check spam for sender <a href="mailto:hello@ai.rockstarrandmoon.com">hello@ai.rockstarrandmoon.com</a>. Or just type “Show me the replies waiting for my approval” in Cowork — the queue is there regardless of whether the email arrived.</p>
+<h2 id="6-the-morning-email">6. The morning email</h2>
+<p>One email per scheduled run, only when there are reply drafts waiting. From <a href="mailto:hello@ai.rockstarrandmoon.com">hello@ai.rockstarrandmoon.com</a>. Replies to your Rockstarr strategist directly.</p>
+<p>Single reply</p>
+<ul>
+<li><p>Subject: Reply from &lt;lead&gt; needs your review</p></li>
+<li><p>Body: lead context, what they said, classification (bucket / proposed label / proposed follow-up timer), drafted response inline, click-to-approve link.</p></li>
+</ul>
+<p>Multiple replies</p>
+<ul>
+<li><p>Subject: N new replies need your review</p></li>
+<li><p>Body: per-reply card, most recent first. Each card has its own click-to-approve link. Soft cap of 8 cards per email; if more landed in one run, the email shows the 8 most recent and tells you how many more are in the queue.</p></li>
+</ul>
+<p>Three-option warm replies</p>
+<ul>
+<li>If a draft is one of the three-option cases (warm but not your ICP), all three options render inline so you can read them in the email. You still pick one in Cowork.</li>
+</ul>
+<p>The link inside the email opens Cowork at present-for-approval for that specific draft. You can also approve from the queue list — the email is the trigger; Cowork is where you act.</p>
+<blockquote>
+<p><strong>What if you miss the email?</strong></p>
+<p>The next morning’s daily approvals digest from rockstarr-infra still surfaces every reply draft sitting in /03_drafts/replies/. Nothing falls off. The urgent email is for fast-turn replies on the day they land; the digest is the safety net for everything still pending.</p>
+</blockquote>
+<h2 id="7-how-to-interact-with-the-system">7. How to interact with the system</h2>
+<p>How it works at a high level</p>
+<p>Every action is a short English instruction you type into a Cowork task. No commands, no syntax, no menus. You describe what you want in plain words; the system figures out which step to run, asks follow-up questions when it needs to, and shows you drafts before anything leaves your workspace.</p>
+<p>A few ground rules that make this easier:</p>
+<ul>
+<li><p>If you know what you want to do, say it directly: “Run today’s outreach loop.”</p></li>
+<li><p>If you are not sure what to call it, describe it: “I want to see which leads have gone quiet this week on the Alex account.” Both work.</p></li>
+<li><p>The system will ask before doing anything irreversible. You can always say “Wait, let me check something first.”</p></li>
+<li><p>You do not need to get the prompt word-perfect. These are starting points, not magic phrases.</p></li>
+</ul>
+<p>Walkthrough: creating a new campaign</p>
+<p>This is the flow you will run with your Rockstarr lead the first time, and again whenever you want to launch a new ICP.</p>
+<ol start="13" type="1">
+<li><p>Open a new task and type: “Draft a new outreach campaign.” The system pulls your baseline ICP from the onboarding workbook and starts a per-campaign clarification pass.</p></li>
+<li><p>Answer its questions one at a time. Typical sequence: role, company size, geography, disqualifiers, the single pain this ICP feels, and the anchor phrase (a short line naming that pain in your voice). Answer in plain English. If you are not sure, say “not sure — propose something” and the system will suggest an option for you to confirm.</p></li>
+<li><p>Review the drafted three-step sequence. A short connect note and two follow-ups. If anything is off, push back: “Rewrite the connect note to open on [specific observation].” “Follow-up 1 is too long — cut it in half.” “The anchor phrase feels off. Try something closer to: [your wording].” Repeat until it reads like you.</p></li>
+<li><p>Approve: “Approve this campaign.” The draft moves into your approved folder and becomes the reference copy.</p></li>
+<li><p>Configure in Interceptly: “Configure the campaign in Interceptly.” The system opens Interceptly on the account you choose, builds the campaign there using your ICP filters and the approved copy, and stops at CONFIGURED. A human — you or your Rockstarr lead — presses Start inside Interceptly. That is the only gate the bot never crosses.</p></li>
+</ol>
+<p>Walkthrough: the morning email path</p>
+<p>Most weekdays, this is all you do:</p>
+<ol start="18" type="1">
+<li><p>Get the email. Subject: “N new replies need your review.”</p></li>
+<li><p>Click the link in any card. Cowork opens at the approval queue.</p></li>
+<li><p>For each draft, pick one response:</p>
+<ul>
+<li><p>“Approve.” Sends as written, via Interceptly, on the correct account.</p></li>
+<li><p>“Edit: [your changes].” The system applies the edit and shows you the updated draft for a final approve.</p></li>
+<li><p>“Reject. Reason: [one short line].” Kills this draft. You can ask for another: “Draft another response to this reply.”</p></li>
+<li><p>“Flag for review.” The thread stays in a review bin so you can come back to it (or loop in your Rockstarr lead).</p></li>
+</ul></li>
+</ol>
+<p>Walkthrough: driving the loop manually</p>
+<p>If you want to be in the chat as the bot works:</p>
+<ol start="21" type="1">
+<li><p>Type “Just preview today’s queue before we start.” The system shows unread counts, overdue tasks, and flagged leads per account. Read it. If satisfied, continue.</p></li>
+<li><p>Type “Run today’s outreach loop.” The system confirms each account’s session, walks the inbox, and presents drafts to you inline as it finds them.</p></li>
+<li><p>Approve / edit / reject / flag each draft in real time. No email is sent at the end — you already saw everything.</p></li>
+</ol>
+<p>Walkthrough: pausing, stopping, marking a manual booking</p>
+<ul>
+<li><p>Pause a campaign: “Pause the [campaign] campaign.” In-flight leads stay in place so you can resume without losing them. The bot pauses the campaign inside Interceptly on the matching account.</p></li>
+<li><p>Stop a campaign: “Stop the [campaign] campaign.” Ends it. In-flight leads fall off the sequence inside Interceptly.</p></li>
+<li><p>Mark a manual booking: “Mark the meeting with [lead’s name] as booked for [date and time].” The system flips the lead’s state, cancels remaining follow-ups, applies the Booked label inside Interceptly on the correct account, and records the booking so the weekly report picks it up.</p></li>
+</ul>
+<p>Walkthrough: the Friday report</p>
+<ol start="24" type="1">
+<li><p>Type: “Generate this week’s outreach report.” The system rolls up connects, accepts, replies, bookings, reply rate, and book rate per account and per campaign, writes the report into 06_reports/weekly/, and shows it in your task.</p></li>
+<li><p>Review it with your Rockstarr lead. Campaigns flagged “watch” come with a one-line diagnosis. If you want to act on a recommendation on the spot: “Tighten the ICP on [campaign].” “Pause [campaign] — the reply rate isn’t there.”</p></li>
+<li><p>Before you close out the week, type: “Back up the outreach workbook.” A timestamped copy lands in /06_reports/data/. Do this any time before a big change, and every Friday as a habit.</p></li>
+</ol>
+<p>Quick reference: the prompts you will use most often</p>
+<ul>
+<li><p>Catch up on replies anytime: “Show me the replies waiting for my approval.”</p></li>
+<li><p>Run the loop manually: “Run today’s outreach loop.”</p></li>
+<li><p>Preview only, don’t run: “Just preview today’s queue before we start.”</p></li>
+<li><p>New campaign: “Draft a new outreach campaign.” → “Approve this campaign.” → “Configure the campaign in Interceptly.”</p></li>
+<li><p>Pause or stop: “Pause the [campaign] campaign.” / “Stop the [campaign] campaign.”</p></li>
+<li><p>Manual booking: “Mark the meeting with [name] as booked for [time].”</p></li>
+<li><p>Friday report: “Generate this week’s outreach report.”</p></li>
+<li><p>Backup: “Back up the outreach workbook.”</p></li>
+</ul>
+<p>When you are not sure what to ask for</p>
+<p>Describe what you want in plain English. You do not need to know the skill names. All of these work:</p>
+<ul>
+<li><p>“I’m seeing replies but none are from the kind of company I’m trying to reach. What’s going on?”</p></li>
+<li><p>“Show me every lead on the Alex account that has been in a sequence for more than a week with no reply.”</p></li>
+<li><p>“Why did replies on the Rachel account dry up this week?”</p></li>
+<li><p>“Can I see the last three messages sent to [lead’s name]?”</p></li>
+<li><p>“What’s the next thing you’d suggest we tune?”</p></li>
+</ul>
+<p>The system reads the relevant files in your workspace and answers. If your question is ambiguous, it asks a clarifier before acting.</p>
+<blockquote>
+<p><strong>Rule of thumb</strong></p>
+<p>If you can say it to your Rockstarr lead in plain English, you can type it as a prompt. When in doubt, type what you want. You will not break anything — nothing sends on a reply thread without your explicit approval, and the bot never presses Start on an Interceptly campaign.</p>
+</blockquote>
+<h2 id="8-your-weekly-touchpoint">8. Your weekly touchpoint</h2>
+<p>Every Friday, about 30 minutes with your Rockstarr lead:</p>
+<ul>
+<li><p>Open the weekly report (generated every Friday end-of-day).</p></li>
+<li><p>Review the per-account, per-campaign numbers: connects, accepts, replies, books, reply rate, book rate.</p></li>
+<li><p>Review any campaigns flagged as off-pace, with the short diagnosis attached.</p></li>
+<li><p>Approve next week’s adjustments. Tighten an ICP, swap an Interceptly filter, pause a campaign, add one, tune the warm-reply pattern.</p></li>
+</ul>
+<p>If a campaign is underperforming, we tell you, we tell you why, and we propose a fix. That is the point of the Friday meeting.</p>
+<h2 id="9-what-you-approve-and-when">9. What you approve, and when</h2>
+<p>The system will not send these things without your explicit approval:</p>
+<ol start="27" type="1">
+<li><p>Campaign launches. A new ICP, Interceptly filter, and three-step sequence is drafted and held in draft state until you approve it. A human still presses Start inside Interceptly.</p></li>
+<li><p>Replies to leads. Every reply the system drafts is held in your queue until you approve it (via the email link or the Cowork prompt). Background runs stage; foreground runs present inline. Either way, you authorize before anything sends.</p></li>
+<li><p>Manual bookings. If you chose manual booking, you pick the time and run a short confirmation so the system knows the meeting is set.</p></li>
+</ol>
+<p>Sequence sends are governed by Interceptly on the account you pressed Start on. The weekly report does not require per-item approval — it is a mirror of what already happened.</p>
+<blockquote>
+<p><strong>Voice and scrub passes, before you see anything</strong></p>
+<p>Every draft runs through two passes before it hits your queue: a voice pass against your approved style guide, and a final scrub that strips the usual AI tells (em dashes, “not X but Y” constructions, passive voice, filler openers, metronomic rhythm). You still review the result, but what you are reviewing has already had the robotic edges taken off.</p>
+</blockquote>
+<h2 id="10-booking-flow">10. Booking flow</h2>
+<p>Two modes. Pick one per campaign. You can use different modes for different campaigns.</p>
+<p>Automated booking (booking link)</p>
+<ul>
+<li><p>You give us a booking link, whether Calendly, SavvyCal, GrowthAmp calendars, or similar.</p></li>
+<li><p>When a lead shows meeting intent, the system proposes two or three specific times and includes the link in the approved reply.</p></li>
+<li><p>The lead books. The meeting lands on your calendar.</p></li>
+</ul>
+<p>Manual booking (Google Calendar read)</p>
+<ul>
+<li><p>The system reads your Google Calendar to find open slots.</p></li>
+<li><p>The system drafts a reply proposing two or three specific times.</p></li>
+<li><p>You approve the reply. The lead replies with a time.</p></li>
+<li><p>You book the meeting manually on your calendar and confirm it in Cowork so the system can record the booking and label the Interceptly thread.</p></li>
+</ul>
+<blockquote>
+<p><strong>One rule, zero exceptions</strong></p>
+<p>The booking link is never included in a sequence message. It only appears inside a reply you have approved, after a lead has expressed meeting intent. This keeps your outreach conversational rather than transactional and protects your reply rate.</p>
+</blockquote>
+<h2 id="11-caps-and-guardrails">11. Caps and guardrails</h2>
+<p>Most of the pacing lives inside Interceptly — we configure it there and let Interceptly run it. The guardrails the bot enforces, regardless of what Interceptly is doing:</p>
+<ul>
+<li><p>Confirm-session gate on every pass, every account. Every per-account run verifies the Interceptly sidebar AND the underlying LinkedIn profile URL before anything sends. Wrong-account sending is the top reputational risk in this pillar; the bot refuses to run when this check fails.</p></li>
+<li><p>One campaign per lead. A lead already in one campaign on one account cannot be enrolled in a second.</p></li>
+<li><p>No Start press from the bot. Every Interceptly campaign starts on a human click. The bot builds the campaign to CONFIGURED and stops.</p></li>
+<li><p>No reply-thread send without your approval. Background runs stage; only your “send it” in Cowork releases the message.</p></li>
+<li><p>A failed session on one account skips that account but does NOT abort the whole run — other accounts still get serviced.</p></li>
+<li><p>Interceptly’s own pacing and account health protections apply on top of all of the above.</p></li>
+</ul>
+<p>The reason the bot doesn’t layer its own per-day cap on top of Interceptly’s: Interceptly already enforces safe pacing per account, and adding a second cap on top either contradicts it or becomes theater. Where we add value is in the gates Interceptly doesn’t watch — session match, ICP qualification, reply drafting, approval-gating, and Start-button discipline.</p>
+<h2 id="12-the-weekly-report">12. The weekly report</h2>
+<p>The Friday report is a short document. It contains:</p>
+<ul>
+<li><p>Summary. Three headline numbers: connects sent this week (across all accounts), accepts received this week, meetings booked this week.</p></li>
+<li><p>Per-account, per-campaign breakdown. One row per active campaign per account with the same numbers, plus reply rate and book rate.</p></li>
+<li><p>Wins. Named leads who replied or booked, so you can prep for specific conversations.</p></li>
+<li><p>Watch. Campaigns or accounts that are off-pace, each with a one-line diagnosis and a proposed adjustment.</p></li>
+<li><p>Next week. Specific changes we are making, if any.</p></li>
+</ul>
+<p>Every weekly report is kept. They live in /06_reports/weekly/ in your workspace, dated, so you can look back across months.</p>
+<h2 id="13-common-questions">13. Common questions</h2>
+<p>What if I miss the morning email?</p>
+<p>Type “Show me the replies waiting for my approval” in Cowork and you’ll see the same queue the email pointed at. If a draft has been sitting since yesterday, the next morning’s daily approvals digest from rockstarr-infra also surfaces it. Nothing falls off.</p>
+<p>Can I run the loop manually if I prefer?</p>
+<p>Yes. Type “Run today’s outreach loop.” The same skill runs in foreground mode — drafts get presented to you inline as the bot finds them, and you approve / edit / reject in real time. No email at the end.</p>
+<p>What if a lead replies “not interested”?</p>
+<p>rockstarr-reply classifies it as a decline, the outreach plugin applies the Not Interested label inside Interceptly on that thread, and cancels any pending follow-ups for that lead. No chase message. No follow-up attempt. This happens automatically — no draft, no approval needed.</p>
+<p>Can I run multiple campaigns at once, across multiple accounts?</p>
+<p>Yes. Each account runs its own set of Interceptly campaigns. The daily loop rotates through every account on every pass, so all campaigns get service. The weekly report rolls everything up.</p>
+<p>What if I am traveling and cannot approve replies for a day or two?</p>
+<p>Replies queue. Nothing sends on a reply thread without your approval. You will have a slightly longer review list when you return, but no damage is done. Leads who replied still see a human pause, not a reflexive bot response.</p>
+<p>What if LinkedIn flags one of my accounts?</p>
+<p>Call your Rockstarr lead immediately. We pause everything on that account and assess before restarting. The conservative pacing — run by Interceptly, guarded by our session check — exists precisely to make this almost never happen.</p>
+<p>What if a session fails on one of my accounts during the scheduled run?</p>
+<p>That account is skipped for that pass. Other accounts still get serviced. The failure shows up in the per-run summary and in your morning email’s footer if you got one. You can rerun just that account by typing “Run today’s outreach loop just on the [account] account.”</p>
+<p>Can I change the sequence copy mid-campaign?</p>
+<p>Yes. We update the campaign spec, pause the old sequence inside Interceptly for new leads, and keep in-flight leads on their current track. Changing copy mid-stream for leads already in the sequence reads as inconsistent and hurts reply rates.</p>
+<p>Does this plugin also do email outreach?</p>
+<p>No. LinkedIn only, via Interceptly. Email outreach is a separate part of the Rockstarr AI Growth Operating System.</p>
+<p>What happens if I pause or end my engagement?</p>
+<p>Your workspace stays intact. The plugin stops receiving updates through the Rockstarr marketplace. The outreach stops when we stop running the daily loop with you. Nothing disappears.</p>
+<p>Why does the bot never press Start inside Interceptly?</p>
+<p>Deliberate. Start is the single action that says “yes, this campaign, on this account, right now.” We want a human on the other side of that click every time. The bot builds the campaign, loads the filters, loads the approved copy, and stops. You press Start.</p>
+<h2 id="14-when-to-contact-rockstarr">14. When to contact Rockstarr</h2>
+<ul>
+<li><p>LinkedIn warning on any managed account. Call immediately, not email.</p></li>
+<li><p>You want to launch a new campaign or spin up a new account.</p></li>
+<li><p>You want to pause or stop a campaign.</p></li>
+<li><p>The reply queue is growing faster than you can approve it.</p></li>
+<li><p>A lead booked and the meeting is not on your calendar.</p></li>
+<li><p>Wrong account being worked on. This should never happen — the session check is a hard gate — but if you ever see it, stop the loop and call.</p></li>
+<li><p>Morning email did not arrive but you know replies came in. Check spam first; if still missing, your Rockstarr lead can resend the digest manually.</p></li>
+<li><p>You saw something in the weekly report that does not match what you expected.</p></li>
+</ul>
+<p>Your Rockstarr lead is the primary contact. The plugin is the tool. We are the humans behind it.</p>
+<p><strong>One closing note.</strong></p>
+<p>This system works best when you treat it like a pipeline habit, not a software product. The 10 to 15 minutes per day you spend on the reply queue is what turns connects into conversations, and conversations into booked meetings. The rest runs on Interceptly, on its own.</p>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

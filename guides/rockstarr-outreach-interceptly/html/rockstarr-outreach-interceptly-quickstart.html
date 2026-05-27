@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Outreach Quickstart — Interceptly Edition</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-outreach-quickstart--interceptly-edition">Rockstarr Outreach Quickstart — Interceptly Edition</h1>
+<p><em>v0.2.5</em></p>
+<blockquote>
+<p><strong>Before your first session</strong></p>
+<ul>
+<li>An Interceptly seat with at least one LinkedIn account connected, signed in in your default browser.</li>
+<li>Your baseline ICP (from the onboarding workbook). We refine it per-campaign in the session.</li>
+<li>An Interceptly saved-search / ICP filter set matching the first campaign’s ICP.</li>
+<li>rockstarr-reply installed in your workspace — this is where every reply draft goes for your approval.</li>
+<li>rockstarr-infra v0.8.0 or newer installed — powers the morning email when replies land overnight.</li>
+<li>45 minutes on the calendar with your Rockstarr lead.</li>
+<li>A booking link (Calendly, GrowthAmp, etc.) OR access to share your Google Calendar.</li>
+</ul>
+</blockquote>
+<p>How you talk to the system</p>
+<p>You type short, plain-English instructions into a Cowork task. No commands, no menus. The system asks follow-up questions when it needs to and shows you drafts before anything leaves your workspace. You do not need to know skill names — “Run today’s outreach loop” and “Let’s do today’s LinkedIn run” both work. If you manage more than one LinkedIn account through Interceptly, the system rotates through them in order and confirms the session before each one.</p>
+<p>The daily loop also runs on a schedule (default 7am local) without you in the chat. When it runs in the background, it stages every reply draft to your approval queue and emails you ONCE if there are drafts waiting. Click the link in the email to open Cowork at the approval queue. If nothing landed overnight, you get no email — silence is good news. You can still drive the loop manually anytime by typing “Run today’s outreach loop” — same skill, just with you watching.</p>
+<p>Your first campaign, end to end</p>
+<ol type="1">
+<li><p>In a new task, type: “Draft a new outreach campaign.” The system pulls your baseline ICP from the onboarding workbook and starts a per-campaign clarification pass.</p></li>
+<li><p>Answer its questions one at a time: role, company size, geography, disqualifiers, the single pain this ICP feels, and an anchor phrase naming that pain in your voice. Plain English. If you are not sure, say “not sure — propose something.”</p></li>
+<li><p>Review the drafted three-step Interceptly sequence: a short connect note and two follow-ups. Push back if anything is off: “The connect note is too pitchy — rewrite it to open on [specific observation].” “Follow-up 2 is too long — cut it in half.” Repeat until it reads like you.</p></li>
+<li><p>Type: “Approve this campaign.”</p></li>
+<li><p>Type: “Configure the campaign in Interceptly.” The system opens Interceptly, builds the campaign, and stops at CONFIGURED. A human — you or your Rockstarr lead — presses Start inside Interceptly.</p></li>
+</ol>
+<p>Your daily rhythm (10 min, or 15 min if you manage multiple accounts)</p>
+<ul>
+<li><p>Morning (2 min). Check email. If the bot found replies overnight you have ONE message from Rockstarr AI titled “N new replies need your review.” Click the link in the email — it opens Cowork at the approval queue with the most recent reply loaded. If you got no email, the loop ran and nothing needed your attention; carry on with your day.</p></li>
+<li><p>Midday (5 to 10 min). Walk the queue. For each draft, respond with “Approve,” “Edit: [your changes],” “Reject. Reason: [short note],” or “Flag for review.” Approving is what actually sends through Interceptly on the right account.</p></li>
+<li><p>That’s it. Close the task.</p></li>
+</ul>
+<p>If you want to drive the loop manually instead — say you want to eyeball things before anything ships — type “Just preview today’s queue before we start.” The system shows unread counts, overdue tasks, and flagged leads per account. When you are satisfied, type “Run today’s outreach loop.” That foreground path threads approvals through inline as the bot finds them, and skips the email.</p>
+<p>The morning email, in one paragraph</p>
+<p>One email per scheduled run, only when there are reply drafts waiting. Subject reads “N new replies need your review” or “Reply from &lt;name&gt; needs your review” for a single. Each card shows the lead, what they said, the drafted response, the proposed label, and the proposed follow-up timer. There is one link per card that opens Cowork at the approval flow for that exact draft. If more than 8 replies landed in one run, the email shows the 8 most recent and tells you how many more are in the queue. The email is the trigger; Cowork is where you act.</p>
+<p>Other things you will need to type</p>
+<ul>
+<li><p>Pause or stop a campaign: “Pause the [campaign] campaign.” / “Stop the [campaign] campaign.”</p></li>
+<li><p>Manual booking: “Mark the meeting with [name] as booked for [time].”</p></li>
+<li><p>Friday report: “Generate this week’s outreach report.”</p></li>
+<li><p>Weekly backup: “Back up the outreach workbook.”</p></li>
+<li><p>Catch-up digest at any time: “Show me the replies waiting for my approval.”</p></li>
+<li><p>Any question: Describe what you want. “Why did replies on the [account] account dry up this week?” and “Show me the last three messages sent to [lead].” both work.</p></li>
+</ul>
+<p>Your Friday rhythm (30 min)</p>
+<ul>
+<li><p>Open this week’s report in 06_reports/weekly/.</p></li>
+<li><p>Review the summary and per-account, per-campaign numbers with your Rockstarr lead.</p></li>
+<li><p>Approve any adjustments for next week: tighten an ICP, pause a campaign, add one, tune the warm-reply pattern.</p></li>
+</ul>
+<p>If something goes sideways</p>
+<ul>
+<li><p>LinkedIn warning on any managed account. Call your Rockstarr lead immediately. We pause everything for that account.</p></li>
+<li><p>Reply queue is overwhelming. Tell your Rockstarr lead. We slow the cadence in Interceptly.</p></li>
+<li><p>Meeting booked but not on your calendar. Tell your Rockstarr lead. We reconcile.</p></li>
+<li><p>Wrong account being worked on. This should never happen — the system confirms the underlying LinkedIn profile URL before every per-account pass — but if you ever see it, stop the loop and call.</p></li>
+<li><p>Morning email did not arrive but you know replies came in. Check your spam folder for sender <a href="mailto:hello@ai.rockstarrandmoon.com">hello@ai.rockstarrandmoon.com</a>. If still missing, your Rockstarr lead can resend the digest manually — the drafts are still in the queue waiting for you.</p></li>
+<li><p>Anything else. Call your Rockstarr lead.</p></li>
+</ul>
+<blockquote>
+<p><strong>Your safety net</strong></p>
+<ul>
+<li>Interceptly is source-of-truth for every send. The local workbook is an audit mirror; if they disagree, Interceptly wins.</li>
+<li>Every run verifies the Interceptly sidebar AND the underlying LinkedIn profile URL before anything goes out — on every account, every pass.</li>
+<li>Nothing goes out on a reply thread without your approval. Background runs stage drafts; only your “send it” in Cowork releases them.</li>
+<li>The bot never presses Start on an Interceptly campaign. That remains a human click.</li>
+<li>Every draft passes a voice pass and an AI-slop scrub before it hits your queue.</li>
+<li>If you miss the morning email, the next morning’s daily approvals digest still surfaces every reply draft sitting in the queue. Nothing falls off.</li>
+<li>Every week, you see every number, including the ones that went the wrong way.</li>
+</ul>
+</blockquote>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>
