@@ -40,12 +40,12 @@
     {
       "name": "rockstarr-outreach-interceptly",
       "description": "Rockstarr AI LinkedIn outreach plugin for clients on Interceptly. Owns the Interceptly integration end-to-end: account discovery, persona capture, campaign lifecycle (draft, launch, pause, stop), multi-account daily inbox + tasks loop, per-reply send / label / follow-up / booking, and outreach metrics + weekly reports. Every inbound reply routes through rockstarr-reply for drafting and operator approval before sending.",
-      "version": "0.2.6",
+      "version": "0.3.0",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
         "path": "rockstarr-outreach-interceptly",
-        "ref": "rockstarr-outreach-interceptly-v0.2.6"
+        "ref": "rockstarr-outreach-interceptly-v0.3.0"
       }
     },
     {
